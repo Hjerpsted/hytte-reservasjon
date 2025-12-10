@@ -2,179 +2,153 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#667eea">
-    <meta name="description" content="Book the company mountain cabin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Cabin Booking">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="icon-192.png">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <title>Mountain Cabin Booking</title>
+    <title>Imlevegen 360</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
-        }
-
-        .install-banner {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .install-banner button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
-            padding: 30px;
+            padding: 24px 16px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 6px;
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 1.1em;
+            font-size: 0.95em;
         }
 
         .content {
-            padding: 30px;
+            padding: 16px;
+            max-width: 100%;
         }
 
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .month-nav {
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
 
         .month-nav button {
             background: #667eea;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
         }
 
-        .month-nav button:hover {
+        .month-nav button:active {
+            transform: scale(0.95);
             background: #5568d3;
-            transform: translateY(-2px);
         }
 
         .month-nav h2 {
             color: #2c3e50;
-            min-width: 200px;
+            font-size: 1.3em;
+            flex: 1;
             text-align: center;
         }
 
         .legend {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 0.85em;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
+            gap: 6px;
         }
 
         .legend-box {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
             border: 2px solid #ddd;
         }
 
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 6px;
+            margin-bottom: 20px;
         }
 
         .day-header {
             text-align: center;
             font-weight: bold;
             color: #667eea;
-            padding: 15px 5px;
-            font-size: 0.9em;
+            padding: 8px 2px;
+            font-size: 0.75em;
         }
 
         .day {
             aspect-ratio: 1;
             border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 6px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             background: white;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            min-height: 44px;
         }
 
-        .day:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .day:active {
+            transform: scale(0.95);
         }
 
         .day.other-month {
-            opacity: 0.3;
-            cursor: default;
-        }
-
-        .day.other-month:hover {
-            transform: none;
-            box-shadow: none;
+            opacity: 0.25;
+            pointer-events: none;
         }
 
         .day.booked {
@@ -190,45 +164,47 @@
         .day-number {
             font-weight: bold;
             color: #2c3e50;
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
 
         .day-status {
-            font-size: 0.75em;
+            font-size: 0.65em;
             color: #666;
-            margin-top: 5px;
+            margin-top: 2px;
+            text-align: center;
+            line-height: 1.1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
         }
 
-        .booking-form {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 30px;
-        }
-
-        .booking-form h3 {
+        .form-section h3 {
             color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            font-size: 1.3em;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #2c3e50;
             font-weight: 600;
+            font-size: 0.95em;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #2c3e50;
+            transition: border-color 0.2s;
         }
 
         .form-group input:focus {
@@ -237,28 +213,30 @@
         }
 
         .button-group {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
             background: #667eea;
             color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
         .btn-secondary {
@@ -266,95 +244,116 @@
             color: #2c3e50;
         }
 
-        .btn-secondary:hover {
-            background: #d0d0d0;
-        }
-
-        .bookings-list {
-            margin-top: 30px;
-        }
-
         .bookings-list h3 {
             color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .list-subtitle {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 16px;
+            line-height: 1.4;
         }
 
         .booking-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
             border: 2px solid #e0e0e0;
-        }
-
-        .booking-info {
-            flex: 1;
         }
 
         .booking-dates {
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-size: 1em;
         }
 
         .booking-name {
             color: #666;
             font-size: 0.9em;
+            margin-bottom: 12px;
         }
 
         .btn-delete {
             background: #e57373;
             color: white;
-            padding: 8px 16px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s;
+            font-weight: 600;
+            width: 100%;
+            font-size: 0.95em;
+            touch-action: manipulation;
         }
 
-        .btn-delete:hover {
+        .btn-delete:active {
+            transform: scale(0.98);
             background: #d32f2f;
         }
 
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #667eea;
-            font-size: 1.1em;
+        .message {
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-weight: 500;
+            font-size: 0.9em;
         }
 
         .error-message {
             background: #ffebee;
             color: #c62828;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
             border: 2px solid #ef5350;
         }
 
         .success-message {
             background: #e8f5e9;
             color: #2e7d32;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
             border: 2px solid #66bb6a;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
+        .loading {
+            text-align: center;
+            padding: 16px;
+            color: #667eea;
+            font-size: 1em;
+        }
 
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 12px;
+        }
+
+        /* Prevent zoom on input focus in iOS */
+        @media screen and (max-width: 768px) {
+            input[type="text"],
+            input[type="date"] {
+                font-size: 16px;
+            }
+        }
+
+        /* iPhone 16 specific optimizations */
+        @media screen and (max-width: 430px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
             .calendar {
-                gap: 5px;
+                gap: 4px;
             }
             
             .day {
-                padding: 5px;
+                padding: 4px;
             }
             
             .day-number {
@@ -362,124 +361,92 @@
             }
             
             .day-status {
-                font-size: 0.65em;
+                font-size: 0.6em;
             }
+        }
 
-            .header h1 {
-                font-size: 1.8em;
+        /* Safe area insets for notch */
+        @supports (padding: env(safe-area-inset-top)) {
+            .header {
+                padding-top: calc(24px + env(safe-area-inset-top));
             }
-
+            
             .content {
-                padding: 15px;
+                padding-bottom: calc(16px + env(safe-area-inset-bottom));
             }
         }
     </style>
 </head>
 <body>
-    <div id="installBanner" class="install-banner">
-        <p>📱 Install this app on your device for easy access!</p>
-        <button onclick="installApp()">Install App</button>
+    <div class="header">
+        <h1>🏔️ Imlevegen 360</h1>
+        <p>Reserver ditt opphold på vår firmahytte her!</p>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <h1>🏔️ Mountain Cabin Booking</h1>
-            <p>Reserve your dates at our company retreat</p>
-        </div>
+    <div class="content">
+        <div id="messageArea"></div>
 
-        <div class="content">
-            <div id="messageArea"></div>
+        <div class="card">
+            <div class="month-nav">
+                <button onclick="previousMonth()" aria-label="Forrige måned">‹</button>
+                <h2 id="currentMonth"></h2>
+                <button onclick="nextMonth()" aria-label="Neste måned">›</button>
+            </div>
 
-            <div class="controls">
-                <div class="month-nav">
-                    <button onclick="previousMonth()">← Previous</button>
-                    <h2 id="currentMonth"></h2>
-                    <button onclick="nextMonth()">Next →</button>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #e8f5e9; border-color: #81c784;"></div>
+                    <span>Ledig</span>
                 </div>
-                <div class="legend">
-                    <div class="legend-item">
-                        <div class="legend-box" style="background: #e8f5e9; border-color: #81c784;"></div>
-                        <span>Ledig</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-box" style="background: #ffebee; border-color: #e57373;"></div>
-                        <span>Booket</span>
-                    </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #ffebee; border-color: #e57373;"></div>
+                    <span>Reservert</span>
                 </div>
             </div>
 
             <div class="calendar" id="calendar"></div>
+        </div>
 
-            <div class="booking-form">
-                <h3>Make a Booking</h3>
-                <div class="form-group">
-                    <label for="employeeName">Your Name:</label>
-                    <input type="text" id="employeeName" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="startDate">Check-in Date:</label>
-                    <input type="date" id="startDate">
-                </div>
-                <div class="form-group">
-                    <label for="endDate">Check-out Date:</label>
-                    <input type="date" id="endDate">
-                </div>
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="bookCabin()">Book Cabin</button>
-                    <button class="btn btn-secondary" onclick="clearForm()">Clear</button>
-                </div>
+        <div class="card form-section">
+            <h3>📅 Foreta din reservasjon her</h3>
+            <div class="form-group">
+                <label for="employeeName">Ditt navn:</label>
+                <input type="text" id="employeeName" placeholder="Skriv navnet ditt her">
             </div>
+            <div class="form-group">
+                <label for="startDate">Sjekk inn:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="form-group">
+                <label for="endDate">Sjekk ut:</label>
+                <input type="date" id="endDate">
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="bookCabin()">Reserver hytte</button>
+                <button class="btn btn-secondary" onclick="clearForm()">Nullstill</button>
+            </div>
+        </div>
 
-            <div class="bookings-list">
-                <h3>Upcoming Bookings</h3>
-                <div id="bookingsList"></div>
-            </div>
+        <div class="card bookings-list">
+            <h3>📋 Kommende reservasjoner</h3>
+            <p class="list-subtitle">Ikke kanseller annet enn eventuelle egne reservasjoner, takk!</p>
+            <div id="bookingsList"></div>
         </div>
     </div>
 
     <script>
-        // ⚠️ CONFIGURATION - Replace with your Google Apps Script URL
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzHX6SxlWQNcP1CP069XqY1fDRjou0uWZNXERGPH6REo71mkZeJ4Efff8s3buz0fa5v/exec';
 
-        const CANCEL_PASSWORD = 'Promp';
+        // ⚠️ CHANGE THIS PASSWORD TO YOUR OWN
+        const CANCEL_PASSWORD = 'promp';
 
         let currentDate = new Date();
         let bookings = [];
-        let deferredPrompt;
-
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('Service Worker registered'))
-                    .catch(err => console.log('Service Worker registration failed'));
-            });
-        }
-
-        // Install prompt
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installBanner').style.display = 'block';
-        });
-
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    }
-                    deferredPrompt = null;
-                    document.getElementById('installBanner').style.display = 'none';
-                });
-            }
-        }
 
         function showMessage(message, type = 'error') {
             const messageArea = document.getElementById('messageArea');
             const className = type === 'success' ? 'success-message' : 'error-message';
-            messageArea.innerHTML = `<div class="${className}">${message}</div>`;
+            messageArea.innerHTML = `<div class="message ${className}">${message}</div>`;
             
             if (type === 'success') {
                 setTimeout(() => {
@@ -489,7 +456,7 @@
         }
 
         function showLoading() {
-            document.getElementById('messageArea').innerHTML = '<div class="loading">Loading bookings...</div>';
+            document.getElementById('messageArea').innerHTML = '<div class="loading">Laster reservasjoner...</div>';
         }
 
         function clearMessage() {
@@ -497,39 +464,46 @@
         }
 
         async function loadBookings() {
-            if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                showMessage('⚠️ Please configure the Google Apps Script URL in the code.');
-                renderCalendar();
-                renderBookingsList();
-                return;
-            }
-
+            console.log('Starting to load bookings...');
+            console.log('SCRIPT_URL:', SCRIPT_URL);
+            
             showLoading();
             try {
-                const response = await fetch(SCRIPT_URL + '?action=getBookings', {
+                const url = SCRIPT_URL + '?action=getBookings';
+                console.log('Fetching from:', url);
+                
+                const response = await fetch(url, {
                     method: 'GET',
                     redirect: 'follow'
                 });
+                
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
                 const data = await response.json();
+                console.log('Response data:', data);
                 
                 if (data.success) {
                     bookings = data.bookings || [];
+                    console.log('Loaded bookings:', bookings.length);
                     clearMessage();
                 } else {
-                    showMessage('Failed to load bookings: ' + (data.message || 'Unknown error'));
+                    console.error('Server returned error:', data.message);
+                    showMessage('Kan ikke hente reservasjoner: ' + (data.message || 'Ukjent feil'));
                 }
             } catch (error) {
                 console.error('Error loading bookings:', error);
-                showMessage('Unable to connect to booking system: ' + error.message);
+                console.error('Error details:', error.message, error.stack);
+                showMessage('Kan ikke koble til reservasjonssystemet: ' + error.message);
             }
             
             renderCalendar();
             renderBookingsList();
+            console.log('Finished loading bookings');
         }
 
         async function saveBooking(booking) {
@@ -555,15 +529,15 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    showMessage('Booking confirmed!', 'success');
+                    showMessage('✅ Reservasjon bekreftet!', 'success');
                     return true;
                 } else {
-                    showMessage('Failed to save booking: ' + (data.message || 'Unknown error'));
+                    showMessage('Kunne ikke lagre reservasjonen: ' + (data.message || 'Ukjent feil'));
                     return false;
                 }
             } catch (error) {
                 console.error('Error saving booking:', error);
-                showMessage('Unable to save booking: ' + error.message);
+                showMessage('Kunne ikke lagre reservasjonen: ' + error.message);
                 return false;
             }
         }
@@ -588,15 +562,15 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    showMessage('Booking cancelled successfully', 'success');
+                    showMessage('✅ Reservasjonen er fjernet', 'success');
                     return true;
                 } else {
-                    showMessage('Failed to cancel booking: ' + (data.message || 'Unknown error'));
+                    showMessage('Kunne ikke fjerne reservasjonen: ' + (data.message || 'Ukjent feil'));
                     return false;
                 }
             } catch (error) {
                 console.error('Error deleting booking:', error);
-                showMessage('Unable to cancel booking: ' + error.message);
+                showMessage('Kunne ikke fjerne reservasjonen: ' + error.message);
                 return false;
             }
         }
@@ -640,7 +614,7 @@
                 day.className = 'day ' + (booking ? 'booked' : 'available');
                 day.innerHTML = `
                     <div class="day-number">${i}</div>
-                    <div class="day-status">${booking ? `Booket av ${booking.name}` : 'Ledig'}</div>
+                    <div class="day-status">${booking ? booking.name.split(' ')[0] : 'Ledig'}</div>
                 `;
                 day.onclick = () => selectDate(dateStr);
                 calendar.appendChild(day);
@@ -685,12 +659,12 @@
             const endDate = document.getElementById('endDate').value;
 
             if (!name || !startDate || !endDate) {
-                alert('Please fill in all fields');
+                alert('Vennligst fyll inn alle feltene');
                 return;
             }
 
             if (new Date(startDate) > new Date(endDate)) {
-                alert('Check-out date must be after check-in date');
+                alert('Sjekk ut-dato må være etter sjekk inn-dato');
                 return;
             }
 
@@ -704,7 +678,7 @@
                 if ((start >= bookingStart && start <= bookingEnd) ||
                     (end >= bookingStart && end <= bookingEnd) ||
                     (start <= bookingStart && end >= bookingEnd)) {
-                    alert('These dates conflict with an existing booking');
+                    alert('Dette er i konflikt med eksisterende reservasjoner');
                     return;
                 }
             }
@@ -737,25 +711,28 @@
             const upcomingBookings = bookings.filter(b => new Date(b.endDate) >= today);
 
             if (upcomingBookings.length === 0) {
-                list.innerHTML = '<p style="color: #666;">No upcoming bookings</p>';
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>Ingen kommende reservasjoner</p>
+                    </div>
+                `;
                 return;
             }
 
             list.innerHTML = upcomingBookings.map(booking => `
                 <div class="booking-item">
-                    <div class="booking-info">
-                        <div class="booking-dates">
-                            ${new Date(booking.startDate).toLocaleDateString('nb-NO')} - 
-                            ${new Date(booking.endDate).toLocaleDateString('nb-NO')}
-                        </div>
-                        <div class="booking-name">${booking.name}</div>
+                    <div class="booking-dates">
+                        ${new Date(booking.startDate).toLocaleDateString('nb-NO', {day: 'numeric', month: 'short'})} - 
+                        ${new Date(booking.endDate).toLocaleDateString('nb-NO', {day: 'numeric', month: 'short', year: 'numeric'})}
                     </div>
-                    <button class="btn-delete" onclick="deleteBooking(${booking.id})">Cancel</button>
+                    <div class="booking-name">${booking.name}</div>
+                    <button class="btn-delete" onclick="deleteBooking(${booking.id})">Kanseller reservasjon</button>
                 </div>
             `).join('');
         }
 
- async function deleteBooking(id) {
+        async function deleteBooking(id) {
             // Ask for password first
             const enteredPassword = prompt('Skriv inn passord for å kansellere reservasjon:');
             
