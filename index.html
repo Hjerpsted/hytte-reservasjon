@@ -437,6 +437,9 @@
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzHX6SxlWQNcP1CP069XqY1fDRjou0uWZNXERGPH6REo71mkZeJ4Efff8s3buz0fa5v/exec';
 
+        // ⚠️ CHANGE THIS PASSWORD TO YOUR OWN
+        const CANCEL_PASSWORD = 'hytte2024';
+        
         let currentDate = new Date();
         let bookings = [];
 
@@ -729,7 +732,20 @@
             `).join('');
         }
 
-        async function deleteBooking(id) {
+async function deleteBooking(id) {
+            // Ask for password first
+            const enteredPassword = prompt('Skriv inn passord for å kansellere reservasjon:');
+            
+            if (!enteredPassword) {
+                return; // User cancelled
+            }
+            
+            if (enteredPassword !== CANCEL_PASSWORD) {
+                alert('❌ Feil passord! Kan ikke kansellere reservasjon.');
+                return;
+            }
+            
+            // Password correct, now confirm deletion
             if (confirm('Ærru helt, helt sikker?')) {
                 const success = await deleteBookingFromSheet(id);
                 if (success) {
